@@ -147,11 +147,6 @@ if(WIN32)
 
     list(APPEND libraries Ws2_32 Mswsock Synchronization)
     list(APPEND compile_options /EHsc)
-
-    if("${MSVC_VERSION}" VERSION_GREATER_EQUAL 1900)
-      # TODO remove this when experimental/non-experimental include are fixed
-      list(APPEND compile_definition _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING=1)
-    endif()
 endif()
 
 add_library(cppcoro
@@ -165,7 +160,7 @@ add_library(cppcoro
 target_include_directories(cppcoro PUBLIC
 	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
 	$<INSTALL_INTERFACE:include>)
-
+target_compile_features(cppcoro PUBLIC cxx_std_20)
 target_compile_definitions(cppcoro PUBLIC ${compile_definition})
 target_compile_options(cppcoro PUBLIC ${compile_options})
 
