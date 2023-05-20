@@ -3,9 +3,9 @@
 // Licenced under MIT license. See LICENSE.txt for details.
 ///////////////////////////////////////////////////////////////////////////////
 
+#if CPPCORO_OS_WINNT
 #include <cppcoro\read_write_file.hpp>
 
-#if CPPCORO_OS_WINNT
 # ifndef WIN32_LEAN_AND_MEAN
 #  define WIN32_LEAN_AND_MEAN
 # endif

@@ -471,12 +471,12 @@ void cppcoro::io_service::notify_work_finished() noexcept
 	}
 }
 
+#if CPPCORO_OS_WINNT
 cppcoro::detail::win32::handle_t cppcoro::io_service::native_iocp_handle() noexcept
 {
 	return m_iocpHandle.handle();
 }
 
-#if CPPCORO_OS_WINNT
 
 void cppcoro::io_service::ensure_winsock_initialised()
 {
@@ -712,11 +712,13 @@ cppcoro::io_service::ensure_timer_thread_started()
 }
 
 cppcoro::io_service::timer_thread_state::timer_thread_state()
+	:
 #if CPPCORO_OS_WINNT
-	: m_wakeUpEvent(create_auto_reset_event())
+	  m_wakeUpEvent(create_auto_reset_event())
 	, m_waitableTimerEvent(create_waitable_timer_event())
+	,
 #endif
-	, m_newlyQueuedTimers(nullptr)
+	  m_newlyQueuedTimers(nullptr)
 	, m_timerCancellationRequested(false)
 	, m_shutDownRequested(false)
 	, m_thread([this] { this->run(); })

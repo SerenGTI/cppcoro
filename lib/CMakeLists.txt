@@ -84,21 +84,22 @@ set(sources
 	async_auto_reset_event.cpp
 	async_manual_reset_event.cpp
 	async_mutex.cpp
+	auto_reset_event.cpp
+	cancellation_registration.cpp
+	cancellation_source.cpp
 	cancellation_state.cpp
 	cancellation_token.cpp
-	cancellation_source.cpp
-	cancellation_registration.cpp
-	lightweight_manual_reset_event.cpp
+	io_service.cpp
 	ip_address.cpp
 	ip_endpoint.cpp
 	ipv4_address.cpp
 	ipv4_endpoint.cpp
 	ipv6_address.cpp
 	ipv6_endpoint.cpp
-	static_thread_pool.cpp
-	auto_reset_event.cpp
-	spin_wait.cpp
+	lightweight_manual_reset_event.cpp
 	spin_mutex.cpp
+	spin_wait.cpp
+	static_thread_pool.cpp
 )
 
 if(WIN32)
@@ -124,7 +125,6 @@ if(WIN32)
 
     set(win32Sources
         win32.cpp
-        io_service.cpp
         file.cpp
         readable_file.cpp
         writable_file.cpp
